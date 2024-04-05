@@ -1,6 +1,6 @@
 Average Price Analysis
 
-This project was initally designed for the [Week 2 2024 Data Preparation Challenge](https://www.preppindata.com/challenges) to be completed in Tableau. However, it has been entirely implemented using SQL.
+This project was initally designed for the Week 2 2024 Data Preparation Challenge (https://www.preppindata.com/challenges) to be completed in Tableau. However, it has been entirely implemented using SQL.
 
 Dataset
 There are 2 Excel files in total, both depicting the seat prices for various classes in an airline. One Excel Workbook contains information on seat prices for those who have a Flow Card, and the other for those who don't.
@@ -47,4 +47,4 @@ As specified in the requirements of the challenge, the final result should be a 
 The result has been exported as a csv file, output.csv.
 
 Acknowledgements
-Special thanks to [preppindata.com](https://www.preppindata.com) for providng an endless supply of datasets and challenges.
+Special thanks to preppindata.com for providng an endless supply of datasets and challenges.
