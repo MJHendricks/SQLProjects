@@ -1,6 +1,6 @@
 Pokemon Stat Analysis
 
-This project was initally designed for the Week 2 2024 Data Preparation Challenge (https://www.preppindata.com/challenges) to be completed in Tableau. However, it has been entirely implemented using SQL.
+This project was initally designed for the Week 8 2022 Data Preparation Challenge (https://www.preppindata.com/challenges) to be completed in Tableau. However, it has been entirely implemented using SQL.
 
 Dataset
 There is 1 Excel file containing 2 sheets in total, containing the stats and evolution line for a selection of Pokemon.
