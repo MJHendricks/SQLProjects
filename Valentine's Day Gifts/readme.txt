@@ -27,7 +27,7 @@ The following instructions were given in order to complete the challenge:
 Output
 The final result is a single file with the following columns: 
 - Couple
-- Number of Valentine's Days as a Couple
+- Number of Valentine's Days Together
 - Gift
 
 The results were exported as a csv file, output.csv.
