@@ -15,15 +15,15 @@ Tools
 
 Instructions
 The following instructions were given in order to complete the challenge:
-- Input the data
-- Calculate the overall average index for each search term
-- Work out the earliest peak for each of these search terms
-- For each year (1st September - 31st August), calculate the average index
-- Classify each search term as either a "Lockdown Fad" or "Still Trendy" based on whether the average index has increased or decreased since last year
-- Filter the countries so that only those with values for each search term remain
-- For each search term, work out which country has the highest percentage
-- Compile the data into a single output
-- Output the data
+- Input the data.
+- Calculate the overall average index for each search term.
+- Work out the earliest peak for each of these search terms.
+- For each year (1st September - 31st August), calculate the average index.
+- Classify each search term as either a "Lockdown Fad" or "Still Trendy" based on whether the average index has increased or decreased since last year.
+- Filter the countries so that only those with values for each search term remain.
+- For each search term, work out which country has the highest percentage.
+- Compile the data into a single output.
+- Output the data.
 
 Output
 As specified in the requirements of the challenge, the final result should be a single file with the following columns: 
