@@ -164,3 +164,197 @@ SELECT AVG([Staycation: (Worldwide)])
 FROM [Timeline$]
 WHERE WEEK BETWEEN '2020-09-01' AND '2021-08-31');
 
+-- create output table
+
+CREATE TABLE Trends ("Search Term" VARCHAR(64));
+
+INSERT INTO Trends ("Search Term")
+VALUES ('Pet Adoption');
+
+INSERT INTO Trends ("Search Term")
+VALUES ('Online Streamer');
+
+INSERT INTO Trends ("Search Term")
+VALUES ('Staycation');
+
+SELECT * FROM Trends;
+-- Classify each search term as either "Lockdown Fad" or "Still Trendy" based on if 19/20 is less than or greater than 20/21
+
+ALTER TABLE Trends
+ADD "Status" VARCHAR(64);
+
+UPDATE Trends
+SET "Status" = (
+SELECT 
+	CASE
+		WHEN "AVG Pet Adoption 19/20" > "AVG Pet Adoption 20/21"
+		THEN 'Lockdown Fad'
+		ELSE 'Still Trendy'
+		END AS 'Status'
+FROM Averages)
+WHERE "Search Term" = 'Pet Adoption';
+
+UPDATE Trends
+SET "Status" = (
+SELECT 
+	CASE
+		WHEN "AVG Online Streamer 19/20" > "AVG Online Streamer 20/21"
+		THEN 'Lockdown Fad'
+		ELSE 'Still Trendy'
+		END AS 'Status'
+FROM Averages)
+WHERE "Search Term" = 'Online Streamer';
+
+UPDATE Trends
+SET "Status" = (
+SELECT 
+	CASE
+		WHEN "AVG Staycation 19/20" > "AVG Staycation 20/21"
+		THEN 'Lockdown Fad'
+		ELSE 'Still Trendy'
+		END AS 'Status'
+FROM Averages)
+WHERE "Search Term" = 'Staycation';
+
+-- remove all rows from Countries where there are null values
+
+DELETE FROM ['Country Breakdown$']
+WHERE [Pet adoption: (01/09/2016 - 01/09/2021)] IS NULL 
+	OR [Online streamer: (01/09/2016 - 01/09/2021)] IS NULL
+	OR [Staycation: (01/09/2016 - 01/09/2021)] IS NULL;
+
+-- Find country with highest percentage for each search term 
+ALTER TABLE Trends
+ADD "Country with Highest Percentage" VARCHAR(128);
+
+UPDATE Trends
+SET "Country with Highest Percentage" = (
+	SELECT Country FROM ['Country Breakdown$']
+	WHERE [Pet adoption: (01/09/2016 - 01/09/2021)] = (SELECT MAX([Pet adoption: (01/09/2016 - 01/09/2021)]) FROM ['Country Breakdown$'])
+)
+WHERE "Search Term" = 'Pet Adoption';
+
+UPDATE Trends
+SET "Country with Highest Percentage" = (
+	SELECT Country FROM ['Country Breakdown$']
+	WHERE [Online streamer: (01/09/2016 - 01/09/2021)] = (SELECT MAX([Online streamer: (01/09/2016 - 01/09/2021)]) FROM ['Country Breakdown$'])
+)
+WHERE "Search Term" = 'Online Streamer';
+
+UPDATE Trends
+SET "Country with Highest Percentage" = (
+	SELECT Country FROM ['Country Breakdown$']
+	WHERE [Staycation: (01/09/2016 - 01/09/2021)] = (SELECT MAX([Staycation: (01/09/2016 - 01/09/2021)]) FROM ['Country Breakdown$'])
+)
+WHERE "Search Term" = 'Staycation';
+
+-- Compile all requested information into Trends Table , then output to file
+SELECT * FROM Trends;
+
+ALTER TABLE Trends 
+ADD "2020/21 AVG Index" FLOAT, "AVG Index" FLOAT, "Index Peak" FLOAT, "First Peak" DATE;
+
+-- set avg index for 2020/2021
+UPDATE Trends
+SET "2020/21 AVG Index" = 
+(
+SELECT ROUND([AVG Pet Adoption 20/21],2)
+FROM Averages
+)
+WHERE "Search Term" = 'Pet Adoption';
+
+UPDATE Trends
+SET "2020/21 AVG Index" = 
+(
+SELECT ROUND([AVG Online Streamer 20/21],2)
+FROM Averages
+)
+WHERE "Search Term" = 'Online Streamer';
+
+UPDATE Trends
+SET "2020/21 AVG Index" = 
+(
+SELECT ROUND([AVG Staycation 20/21],2)
+FROM Averages
+)
+WHERE "Search Term" = 'Staycation';
+
+-- set overall avg index 
+
+UPDATE Trends
+SET "AVG Index" = 
+(
+SELECT ROUND([Average Pet Adoption],2)
+FROM Averages
+)
+WHERE "Search Term" = 'Pet Adoption';
+
+UPDATE Trends
+SET "AVG Index" = 
+(
+SELECT ROUND([Average Online Streamer],2)
+FROM Averages
+)
+WHERE "Search Term" = 'Online Streamer';
+
+UPDATE Trends
+SET "AVG Index" = 
+(
+SELECT ROUND([Average Staycation],2)
+FROM Averages
+)
+WHERE "Search Term" = 'Staycation';
+
+-- set index peak
+
+UPDATE Trends
+SET "Index Peak" = 
+(
+SELECT ROUND(MAX([Pet adoption: (Worldwide)]),2)
+FROM [Timeline$]
+)
+WHERE "Search Term" = 'Pet Adoption';
+
+UPDATE Trends
+SET "Index Peak" = 
+(
+SELECT ROUND(MAX([Online streamer: (Worldwide)]),2)
+FROM [Timeline$]
+)
+WHERE "Search Term" = 'Online Streamer';
+
+UPDATE Trends
+SET "Index Peak" = 
+(
+SELECT ROUND(MAX([Staycation: (Worldwide)]),2)
+FROM [Timeline$]
+)
+WHERE "Search Term" = 'Staycation';
+
+-- set first peak date
+
+UPDATE Trends
+SET "First Peak" = 
+(
+SELECT [Pet Adoption Peak Date]
+FROM Averages
+)
+WHERE "Search Term" = 'Pet Adoption';
+
+UPDATE Trends
+SET "First Peak" = 
+(
+SELECT [Online Streamer Peak Date]
+FROM Averages
+)
+WHERE "Search Term" = 'Online Streamer';
+
+UPDATE Trends
+SET "First Peak" = 
+(
+SELECT [Staycation Peak Date]
+FROM Averages
+)
+WHERE "Search Term" = 'Staycation';
+
+SELECT * FROM Trends
