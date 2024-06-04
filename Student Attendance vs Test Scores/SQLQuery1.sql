@@ -20,4 +20,14 @@ SET F3 = REPLACE ( F3, 'Engish', 'English');
 UPDATE MergedDatasets
 SET F3 = REPLACE ( F3, 'Sciece', 'Science');
 
+-- round test score col
+
+UPDATE MergedDatasets
+SET F4 = ROUND(F4,0)
+
+-- split student name into first name and surname
+ALTER TABLE MergedDatasets
+ADD first_name VARCHAR(64), last_name VARCHAR(64);
+
+
 
