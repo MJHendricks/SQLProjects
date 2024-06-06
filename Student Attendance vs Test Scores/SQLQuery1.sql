@@ -29,5 +29,37 @@ SET F4 = ROUND(F4,0)
 ALTER TABLE MergedDatasets
 ADD first_name VARCHAR(64), last_name VARCHAR(64);
 
+UPDATE MergedDatasets
+SET first_name = LEFT(student_name, CHARINDEX('_', student_name) -1),
+	last_name = SUBSTRING(student_name, CHARINDEX('_', student_name) + 1, LEN(student_name) - CHARINDEX('_', student_name))
+WHERE CHARINDEX('_', student_name) > 0;
 
+-- set attendance flag
+
+ALTER TABLE MergedDatasets
+ADD "Attendance Flag" VARCHAR(128);
+
+UPDATE MergedDatasets
+SET "Attendance Flag" =
+(
+	CASE 
+		WHEN attendance_percentage < 0.7 THEN 'Low Attendance'
+		WHEN attendance_percentage > 0.9 THEN 'High Attendance'
+		ELSE 'Medium Attendance'
+	END
+)
+WHERE attendance_percentage > 0;
+
+-- output
+SELECT 
+	"Attendance Flag", 
+	first_name AS 'First Name',
+	last_name AS 'Surname',
+	attendance_percentage,
+	F1 AS 'Student_ID',
+	F3 AS 'Subject',
+	F4 AS 'Test Score'
+
+FROM MergedDatasets
+ORDER BY Subject;
 

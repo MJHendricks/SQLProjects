@@ -1,0 +1,21 @@
+﻿Attendance Flag,First Name,Surname,attendance_percentage,Student_ID,Subject,Test Score
+Medium Attendance,Bob,Jones,"0,9",1002,English,82
+Low Attendance,Frank,Lee,"0,6",1006,English,77
+Medium Attendance,Irene,Wong,"0,8",1009,English,83
+Low Attendance,Liam,Cooper,"0,6",1012,English,87
+High Attendance,Olivia,Kim,1,1015,English,92
+Low Attendance,Rachel,Tan,"0,6",1018,English,86
+High Attendance,Sam,Kim,1,1019,Math,90
+Medium Attendance,Alice,Smith,"0,75",1001,Math,96
+Medium Attendance,Paul,Jackson,"0,9",1016,Math,87
+Medium Attendance,Mary,Davis,"0,75",1013,Math,93
+Medium Attendance,Jack,Brown,"0,85",1010,Math,88
+High Attendance,Grace,Kim,1,1007,Math,87
+Medium Attendance,David,Wilson,"0,8",1004,Math,91
+Medium Attendance,Eve,Taylor,"0,7",1005,Science,88
+High Attendance,Charlie,Brown,"0,95",1003,Science,79
+Medium Attendance,Henry,Chen,"0,9",1008,Science,93
+Medium Attendance,Kate,Liu,"0,7",1011,Science,90
+Medium Attendance,Nate,Hall,"0,8",1014,Science,94
+Medium Attendance,Quinn,Wang,"0,7",1017,Science,88
+Medium Attendance,Tina,Lee,"0,8",1020,Science,92
